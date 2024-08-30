@@ -1,44 +1,62 @@
 pipeline {
     agent any
 
-    environment {
-        DIRECTORY_PATH = 'C:/Users/Jyols/Documents/Jenkins/SIT753 5.1P'
-        TESTING_ENVIRONMENT = 'testing-environment'
-        PRODUCTION_ENVIRONMENT = 'Justin'
-    }
-
     stages {
         stage('Build') {
             steps {
-                echo "Fetch the source code from the directory path specified by the environment variable: ${DIRECTORY_PATH}"
-                echo "Compile the code and generate any necessary artifacts"
+                sh 'mvn clean package'
             }
+            tool 'Maven'
         }
-        stage('Test') {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Unit tests"
-                echo "Integration tests"
+                sh 'mvn test'
             }
+            tool 'JUnit'
         }
-        stage('Code Quality Check') {
+        stage('Code Analysis') {
             steps {
-                echo "Check the quality of the code"
+                sh 'sonar-scanner'
             }
+            tool 'SonarQube'
         }
-        stage('Deploy') {
+        stage('Security Scan') {
             steps {
-                echo "Deploy the application to a testing environment specified by the environment variable: ${TESTING_ENVIRONMENT}"
+                sh 'owasp-zap'
             }
+            tool 'OWASP ZAP'
         }
-        stage('Approval') {
+        stage('Deploy to Staging') {
             steps {
-                sleep 10
+                sh 'aws deploy push --application-name jenkins-pipeline-demo --s3-bucket my-bucket'
             }
+            tool 'AWS CLI'
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                sh 'mvn test'
+            }
+            tool 'JUnit'
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploy the code to the production environment: ${PRODUCTION_ENVIRONMENT}"
+                sh 'aws deploy push --application-name jenkins-pipeline-demo --s3-bucket my-bucket'
             }
+            tool 'AWS CLI'
+        }
+    }
+    post {
+        success {
+            mail to: 'your-email@example.com',
+                 subject: 'Pipeline Success',
+                 body: 'The pipeline has completed successfully.',
+                 attachLog: true
+        }
+        failure {
+            mail to: 'your-email@example.com',
+                 subject: 'Pipeline Failure',
+                 body: 'The pipeline has failed.',
+                 attachLog: true
         }
     }
 }
