@@ -17,14 +17,12 @@ pipeline {
                 success {
                     mail to: 'jyojus@example.com',
                          subject: 'Unit and Integration Tests Success',
-                         body: 'The unit and integration tests have completed successfully.',
-                         attachments: 'jenkins-console.log'
+                         body: 'The unit and integration tests have completed successfully.'
                 }
                 failure {
                     mail to: 'jyojus@example.com',
                          subject: 'Unit and Integration Tests Failure',
-                         body: 'The unit and integration tests have failed.',
-                         attachments: 'jenkins-console.log'
+                         body: 'The unit and integration tests have failed.'
                 }
             }
         }
@@ -41,14 +39,12 @@ pipeline {
                 success {
                     mail to: 'jyojus@example.com',
                          subject: 'Security Scan Success',
-                         body: 'The security scan has completed successfully.',
-                         attachments: 'jenkins-console.log'
+                         body: 'The security scan has completed successfully.'
                 }
                 failure {
                     mail to: 'jyojus@example.com',
                          subject: 'Security Scan Failure',
-                         body: 'The security scan has failed.',
-                         attachments: 'jenkins-console.log'
+                         body: 'The security scan has failed.'
                 }
             }
         }
@@ -72,14 +68,12 @@ pipeline {
         success {
             mail to: 'jyojus@example.com',
                  subject: 'Pipeline Success',
-                 body: 'The pipeline has completed successfully.',
-                 attachments: 'jenkins-console.log'
+                 body: 'The pipeline has completed successfully.'
         }
         failure {
             mail to: 'jyojus@example.com',
                  subject: 'Pipeline Failure',
-                 body: 'The pipeline has failed.',
-                 attachments: 'jenkins-console.log'
+                 body: 'The pipeline has failed.'
         }
     }
 }
