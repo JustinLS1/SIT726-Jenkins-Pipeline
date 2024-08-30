@@ -18,13 +18,13 @@ pipeline {
                     mail to: 'jyojus@example.com',
                          subject: 'Unit and Integration Tests Success',
                          body: 'The unit and integration tests have completed successfully.',
-                         attachLog: true
+                         attachments: 'jenkins-console.log'
                 }
                 failure {
                     mail to: 'jyojus@example.com',
                          subject: 'Unit and Integration Tests Failure',
                          body: 'The unit and integration tests have failed.',
-                         attachLog: true
+                         attachments: 'jenkins-console.log'
                 }
             }
         }
@@ -39,16 +39,16 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'your-email@example.com',
+                    mail to: 'jyojus@example.com',
                          subject: 'Security Scan Success',
                          body: 'The security scan has completed successfully.',
-                         attachLog: true
+                         attachments: 'jenkins-console.log'
                 }
                 failure {
-                    mail to: 'your-email@example.com',
+                    mail to: 'jyojus@example.com',
                          subject: 'Security Scan Failure',
                          body: 'The security scan has failed.',
-                         attachLog: true
+                         attachments: 'jenkins-console.log'
                 }
             }
         }
@@ -73,13 +73,13 @@ pipeline {
             mail to: 'jyojus@example.com',
                  subject: 'Pipeline Success',
                  body: 'The pipeline has completed successfully.',
-                 attachLog: true
+                 attachments: 'jenkins-console.log'
         }
         failure {
             mail to: 'jyojus@example.com',
                  subject: 'Pipeline Failure',
                  body: 'The pipeline has failed.',
-                 attachLog: true
+                 attachments: 'jenkins-console.log'
         }
     }
 }
