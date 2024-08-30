@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        DIRECTORY_PATH = 'C:/Users/Jyols/Documents/Jenkins/SIT753 6.1C'
+        TESTING_ENVIRONMENT = 'testing-environment'
+        PRODUCTION_ENVIRONMENT = 'Justin'
+    }
+    
     stages {
         stage('Build') {
             steps {
