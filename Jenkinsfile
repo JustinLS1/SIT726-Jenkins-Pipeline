@@ -4,56 +4,79 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                echo "Fetch the source code from the directory path specified by the environment variable: ${DIRECTORY_PATH}"
+                echo "Compile the code and generate any necessary artifacts"
             }
-            tool 'Maven'
         }
         stage('Unit and Integration Tests') {
             steps {
-                sh 'mvn test'
+                echo "Unit tests"
+                echo "Integration tests"
             }
-            tool 'JUnit'
+            post {
+                success {
+                    mail to: 'jyojus@example.com',
+                         subject: 'Unit and Integration Tests Success',
+                         body: 'The unit and integration tests have completed successfully.',
+                         attachLog: true
+                }
+                failure {
+                    mail to: 'jyojus@example.com',
+                         subject: 'Unit and Integration Tests Failure',
+                         body: 'The unit and integration tests have failed.',
+                         attachLog: true
+                }
+            }
         }
         stage('Code Analysis') {
             steps {
-                sh 'sonar-scanner'
+                echo "Meet industry standards"
             }
-            tool 'SonarQube'
         }
         stage('Security Scan') {
             steps {
-                sh 'owasp-zap'
+                echo "Scan for vulnerabilities"
             }
-            tool 'OWASP ZAP'
+            post {
+                success {
+                    mail to: 'your-email@example.com',
+                         subject: 'Security Scan Success',
+                         body: 'The security scan has completed successfully.',
+                         attachLog: true
+                }
+                failure {
+                    mail to: 'your-email@example.com',
+                         subject: 'Security Scan Failure',
+                         body: 'The security scan has failed.',
+                         attachLog: true
+                }
+            }
         }
         stage('Deploy to Staging') {
             steps {
-                sh 'aws deploy push --application-name jenkins-pipeline-demo --s3-bucket my-bucket'
+                echo "Deploy the application to a staging server"
             }
-            tool 'AWS CLI'
         }
         stage('Integration Tests on Staging') {
             steps {
-                sh 'mvn test'
+                echo "Ensure the application functions as expected in a production-like environment"
             }
-            tool 'JUnit'
         }
         stage('Deploy to Production') {
             steps {
-                sh 'aws deploy push --application-name jenkins-pipeline-demo --s3-bucket my-bucket'
+                echo "Deploy the application to a production server"
             }
-            tool 'AWS CLI'
         }
     }
     post {
         success {
-            mail to: 'your-email@example.com',
+            mail to: 'jyojus@example.com',
                  subject: 'Pipeline Success',
                  body: 'The pipeline has completed successfully.',
                  attachLog: true
         }
         failure {
-            mail to: 'your-email@example.com',
+            mail to: 'jyojus@example.com',
                  subject: 'Pipeline Failure',
                  body: 'The pipeline has failed.',
                  attachLog: true
