@@ -24,11 +24,13 @@ pipeline {
                     mail to: 'jyojus@gmail.com',
                          subject: 'Unit and Integration Tests Success',
                          body: 'The unit and integration tests have completed successfully.'
+                         attachLog: true
                 }
                 failure {
                     mail to: 'jyojus@gmail.com',
                          subject: 'Unit and Integration Tests Failure',
                          body: 'The unit and integration tests have failed.'
+                         attachLog: true
                 }
             }
         }
@@ -46,11 +48,13 @@ pipeline {
                     mail to: 'jyojus@gmail.com',
                          subject: 'Security Scan Success',
                          body: 'The security scan has completed successfully.'
+                         attachLog: true
                 }
                 failure {
                     mail to: 'jyojus@gmail.com',
                          subject: 'Security Scan Failure',
                          body: 'The security scan has failed.'
+                         attachLog: true
                 }
             }
         }
@@ -75,11 +79,13 @@ pipeline {
             mail to: 'jyojus@gmail.com',
                  subject: 'Pipeline Success',
                  body: 'The pipeline has completed successfully.'
+                 attachLog: true
         }
         failure {
             mail to: 'jyojus@gmail.com',
                  subject: 'Pipeline Failure',
                  body: 'The pipeline has failed.'
+                 attachLog: true
         }
     }
 }
