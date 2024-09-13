@@ -21,16 +21,16 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'jyojus@gmail.com',
-                         subject: 'Unit and Integration Tests Success',
-                         body: 'The unit and integration tests have completed successfully.'
-                         attachLog: true
+                    emailext body: 'The unit and integration tests have completed successfully.',
+                             subject: 'Unit and Integration Tests Success',
+                             to: 'jyojus@gmail.com',
+                             attachLog: true
                 }
                 failure {
-                    mail to: 'jyojus@gmail.com',
-                         subject: 'Unit and Integration Tests Failure',
-                         body: 'The unit and integration tests have failed.'
-                         attachLog: true
+                    emailext body: 'The unit and integration tests have failed.',
+                             subject: 'Unit and Integration Tests Failure',
+                             to: 'jyojus@gmail.com',
+                             attachLog: true
                 }
             }
         }
@@ -45,16 +45,16 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'jyojus@gmail.com',
-                         subject: 'Security Scan Success',
-                         body: 'The security scan has completed successfully.'
-                         attachLog: true
+                    emailext body: 'The security scan has completed successfully.',
+                             subject: 'Security Scan Success',
+                             to: 'jyojus@gmail.com',
+                             attachLog: true
                 }
                 failure {
-                    mail to: 'jyojus@gmail.com',
-                         subject: 'Security Scan Failure',
-                         body: 'The security scan has failed.'
-                         attachLog: true
+                    emailext body: 'The security scan has failed.',
+                             subject: 'Security Scan Failure',
+                             to: 'jyojus@gmail.com',
+                             attachLog: true
                 }
             }
         }
@@ -76,16 +76,16 @@ pipeline {
     }
     post {
         success {
-            mail to: 'jyojus@gmail.com',
-                 subject: 'Pipeline Success',
-                 body: 'The pipeline has completed successfully.'
-                 attachLog: true
+            emailext body: 'The pipeline has completed successfully.',
+                     subject: 'Pipeline Success',
+                     to: 'jyojus@gmail.com',
+                     attachLog: true
         }
         failure {
-            mail to: 'jyojus@gmail.com',
-                 subject: 'Pipeline Failure',
-                 body: 'The pipeline has failed.'
-                 attachLog: true
+            emailext body: 'The pipeline has failed.',
+                     subject: 'Pipeline Failure',
+                     to: 'jyojus@gmail.com',
+                     attachLog: true
         }
     }
 }
